@@ -1,0 +1,2692 @@
+Last login: Sat May  6 12:38:49 on ttys000
+		                                     DDDN                   
+		                                  DNDDDD$                   
+		                                $DDDDDDD                    
+		                               NDDDDDDDD                    
+		                              NDDDDDDDD                     
+		                              DDDDDDDN                      
+		                             ODDDDDD                        
+		                             NDDDN                          
+		                   ~O+               :MDDD                  
+		              DDDDDDDDDDDDND      NDDDDDDDDDDDNOa           
+		           DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD          
+		         =DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD           
+		         DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDN            
+		        NDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD              
+		       $DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDO              
+		       DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD               
+		       DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD               
+		       DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD               
+		       DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD               
+		       DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD               
+		       DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD?              
+		       NDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD              
+		        DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD~            
+		        NDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD           
+		         DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD         
+		         DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDN        
+		           DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDa          
+		            ZDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD$           
+		             ,DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDI            
+		               DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD              
+		                DDDDDDDDDDDDDNNNDNDDDDDDDDDDD               
+		                  DDDDDDN          ,NDDDDDN                 
+You have mail.
+heddar@hacker ~$ curl -XPOST http://192.168.0.33/filebeat-2017.05.06/_delete_by_query --
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /filebeat-2017.05.06/_delete_by_query was not found on this server.</p>
+</body></html>
+heddar@hacker ~$ curl -XPOST http://192.168.0.33/filebeat-2017.05.06/_delete_by_query
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /filebeat-2017.05.06/_delete_by_query was not found on this server.</p>
+</body></html>
+heddar@hacker ~$ curl -XPOST 'localhost:9200/twitter/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+> {
+>   "query": { 
+>     "match": {
+>       "message": "some message"
+>     }
+>   }
+> }
+> '
+{
+  "error" : {
+    "root_cause" : [
+      {
+        "type" : "index_not_found_exception",
+        "reason" : "no such index",
+        "resource.type" : "index_or_alias",
+        "resource.id" : "twitter",
+        "index_uuid" : "_na_",
+        "index" : "twitter"
+      }
+    ],
+    "type" : "index_not_found_exception",
+    "reason" : "no such index",
+    "resource.type" : "index_or_alias",
+    "resource.id" : "twitter",
+    "index_uuid" : "_na_",
+    "index" : "twitter"
+  },
+  "status" : 404
+}
+heddar@hacker ~$ 
+heddar@hacker ~$ curl -XPOST 'localhost:9200/filebeat-2017.05.06/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "*PFLOG PF Log unknown*"
+    }
+  }
+}
+'
+{
+  "took" : 10919,
+  "timed_out" : false,
+  "total" : 212197,
+  "deleted" : 212197,
+  "batches" : 213,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+heddar@hacker ~$ curl -XPOST 'localhost:9200/filebeat-*/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "*PFLOG PF Log unknown*"
+    }
+  }
+}
+'
+{
+  "took" : 3010,
+  "timed_out" : false,
+  "total" : 51125,
+  "deleted" : 51125,
+  "batches" : 52,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+heddar@hacker ~$ curl -XPOST 'localhost:9200/filebeat-*/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "*PFLOG PF Log unknown*"
+    }
+  }
+}
+'
+{
+  "took" : 52,
+  "timed_out" : false,
+  "total" : 412,
+  "deleted" : 412,
+  "batches" : 1,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+heddar@hacker ~$ curl -XPOST 'localhost:9200/filebeat-2017.05.06/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "*PFLOG PF Log unknown*"
+    }
+  }
+}
+'
+{
+  "took" : 47,
+  "timed_out" : false,
+  "total" : 188,
+  "deleted" : 188,
+  "batches" : 1,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+heddar@hacker ~$ curl -XPOST 'localhost:9200/filebeat-2017.05.06/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "*PFLOG PF Log unknown*"
+    }
+  }
+}
+'
+{
+  "took" : 13,
+  "timed_out" : false,
+  "total" : 188,
+  "deleted" : 0,
+  "batches" : 1,
+  "version_conflicts" : 188,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnq",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnq]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnr",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnr]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnt",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnt]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvns",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvns]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnu",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnu]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnx",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnx]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnv",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnv]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnz",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnz]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvn-",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvn-]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn0",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn0]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoI",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoI]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn7",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn7]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoU",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoU]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoA",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoA]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoX",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoX]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoB",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoB]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoZ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoZ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoD",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoD]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoa",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoa]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoG",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoG]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvob",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvob]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoO",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoO]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoc",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoc]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoQ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoQ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvog",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvog]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoR",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoR]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvoi",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvoi]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoT",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoT]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvor",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvor]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoY",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoY]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvos",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvos]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvod",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvod]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo0",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo0]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvoh",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvoh]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo1",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo1]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvon",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvon]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo6",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo6]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvot",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvot]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvo9",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvo9]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvoz",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvoz]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvo-",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvo-]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo3",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo3]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpG",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpG]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo4",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo4]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpI",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpI]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo7",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo7]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpP",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpP]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvo_",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvo_]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpV",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpV]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpA",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpA]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpb",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpb]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpF",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpF]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpf",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpf]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpM",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpM]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpg",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpg]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpX",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpX]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvph",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvph]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpq",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpq]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpr",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpr]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpx",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpx]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvps",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvps]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp6",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp6]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpy",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpy]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp8",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp8]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvp1",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvp1]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqA",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqA]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqE",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqE]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqB",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqB]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqG",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqG]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqF",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqF]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqQ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqQ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqI",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqI]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqa",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqa]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqK",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqK]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqg",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqg]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "4",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqO",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqO]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqW",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqW]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqY",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqY]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqZ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqZ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqe",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqe]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqf",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqf]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "0",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvno",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvno]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnp",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnp]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn3",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn3]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn4",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn4]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn5",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn5]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvn9",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvn9]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvn_",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvn_]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoJ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoJ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoV",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoV]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn2",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn2]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoW",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoW]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvn8",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvn8]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoe",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoe]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoE",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoE]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvof",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvof]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoH",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoH]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvoj",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvoj]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoK",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoK]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvok",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvok]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoL",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoL]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvnw",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvnw]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvol",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvol]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoN",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoN]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvny",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvny]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvoq",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvoq]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDl78bWMtklCBvoS",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDl78bWMtklCBvoS]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn1",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn1]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvou",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvou]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvop",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvop]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXC8bWMtklCBvn6",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXC8bWMtklCBvn6]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvov",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvov]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpH",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpH]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoC",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoC]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvow",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvow]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpN",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpN]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoF",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoF]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvoy",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvoy]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpY",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpY]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoM",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoM]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo2",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo2]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpZ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpZ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxCXX8bWMtklCBvoP",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxCXX8bWMtklCBvoP]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvo8",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvo8]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpc",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpc]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvom",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvom]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpB",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpB]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpd",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpd]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxDmM8bWMtklCBvoo",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxDmM8bWMtklCBvoo]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpD",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpD]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpj",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpj]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvox",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvox]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpE",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpE]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpk",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpk]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0G8bWMtklCBvo5",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0G8bWMtklCBvo5]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpK",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpK]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpl",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpl]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpC",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpC]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpQ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpQ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpo",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpo]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxE0V8bWMtklCBvpJ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxE0V8bWMtklCBvpJ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpR",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpR]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvp3",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvp3]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpL",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpL]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpS",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpS]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp4",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp4]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCY8bWMtklCBvpO",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCY8bWMtklCBvpO]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpU",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpU]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp7",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp7]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpT",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpT]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxGCk8bWMtklCBvpW",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxGCk8bWMtklCBvpW]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp9",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp9]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpa",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpa]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpm",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpm]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqC",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqC]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpe",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpe]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpn",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpn]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqL",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqL]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQj8bWMtklCBvpi",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQj8bWMtklCBvpi]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpv",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpv]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqN",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqN]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpp",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpp]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpz",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpz]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqR",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqR]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpt",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpt]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp5",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp5]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqS",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqS]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpu",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpu]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp-",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp-]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqT",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqT]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvpw",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvpw]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqH",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqH]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqi",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqi]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvp0",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvp0]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqP",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqP]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqj",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqj]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "1",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxHQ08bWMtklCBvp2",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxHQ08bWMtklCBvp2]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqU",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqU]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvp_",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvp_]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqV",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqV]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqD",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqD]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqX",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqX]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqJ",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqJ]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqb",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqb]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIeu8bWMtklCBvqM",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIeu8bWMtklCBvqM]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqd",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqd]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "3",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqc",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqc]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    },
+    {
+      "index" : "filebeat-2017.05.06",
+      "type" : "pf_firewall",
+      "id" : "AVvdxIfD8bWMtklCBvqh",
+      "cause" : {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[pf_firewall][AVvdxIfD8bWMtklCBvqh]: version conflict, current version [2] is different than the one provided [1]",
+        "index_uuid" : "K3_dXCgwT_aL9f8pPro89g",
+        "shard" : "2",
+        "index" : "filebeat-2017.05.06"
+      },
+      "status" : 409
+    }
+  ]
+}
+heddar@hacker ~$ curl -XPOST 'localhost:9200/filebeat-2017.05.06/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "*PFLOG PF Log unknown*"
+    }
+  }
+}
+'
+{
+  "took" : 53,
+  "timed_out" : false,
+  "total" : 294,
+  "deleted" : 294,
+  "batches" : 1,
+  "version_conflicts" : 0,
+  "noops" : 0,
+  "retries" : {
+    "bulk" : 0,
+    "search" : 0
+  },
+  "throttled_millis" : 0,
+  "requests_per_second" : -1.0,
+  "throttled_until_millis" : 0,
+  "failures" : [ ]
+}
+heddar@hacker ~$ curl -XPOST 'localhost:9200/filebeat-2017.05.06/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "*PFLOG PF Log unknown*"
+    }
+  }
+}
+'
+
