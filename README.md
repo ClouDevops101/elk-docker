@@ -65,3 +65,4 @@ This image is hosted on Docker Hub at [https://hub.docker.com/r/sebp/elk/](https
 Written by [Sébastien Pujadas](https://pujadas.net), released under the [Apache 2 license](https://www.apache.org/licenses/LICENSE-2.0).
 
 # elk-docker
+# elk-docker
