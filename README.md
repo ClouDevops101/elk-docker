@@ -10,8 +10,11 @@ Description : .
 
 HOW It WORKS
 ================
-
-
+Nothing more than :
+```
+docker-compose build
+docker-compose up -d
+```
 
 ### Twitter Keyword tracking
 You'll need to add your secure Oauth twitter account in order to make it happen.
@@ -27,5 +30,8 @@ twitter {
        rate_limit_reset_in => 600
  }
 }
-```
 
+
+```
+### Kibana sample dashboard : 
+An template will be added soonely within the repository 
